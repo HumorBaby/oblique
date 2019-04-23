@@ -68,6 +68,8 @@ class Main(base.RequestHandler):
     def get(self, *args):
         command = args[1] or ""
         command = urllib.unquote(command)
+        if 'globals()' in command:
+            return self.ok("Error: Forbidden operation")
         output = StringIO.StringIO()
         sys.stdout = output
         sys.stderr = output
